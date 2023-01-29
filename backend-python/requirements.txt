@@ -1,0 +1,3 @@
+Flask
+flask
+google-cloud-datastore==2.8.2

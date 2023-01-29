@@ -1,0 +1,692 @@
+{
+	"info": {
+		"_postman_id": "45f08368-68c4-4144-8e6e-bb0d86e48203",
+		"name": "capstone-f22",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23659979"
+	},
+	"item": [
+		{
+			"name": "Create a Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"student_id\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"201 status code\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"content is valid\", function () {\r",
+							"    pm.expect(pm.response.json()[\"OSUID\"]).to.eq(\"lastnameF\");\r",
+							"    pm.expect(pm.response.json()[\"name\"]).to.eq(\"Firstname LastName\");\r",
+							"    pm.expect(pm.response.json()[\"email\"]).to.eq(\"lastnameF@oregonstate.edu\");\r",
+							"    //Check if the self url is correct\r",
+							"    const self_url = pm.environment.get(\"app_url\") + \"/students/\" + pm.response.json()[\"id\"];\r",
+							"    console.log(self_url)\r",
+							"    console.log(pm.response.json()[\"self\"])\r",
+							"    pm.expect(pm.response.json()[\"self\"]).to.eq(self_url);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"OSUID\": \"lastnameF\",\r\n  \"name\": \"Firstname LastName\",\r\n  \"email\": \"lastnameF@oregonstate.edu\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/students",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Class",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"class_id\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"201 status code\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"content is valid\", function () {\r",
+							"    pm.expect(pm.response.json()[\"name\"]).to.eq(\"awesome class\");\r",
+							"    pm.expect(pm.response.json()[\"description\"]).to.eq(\"the most awesome class\");\r",
+							"    pm.expect(pm.response.json()[\"price\"]).to.eq(20);\r",
+							"    pm.expect(pm.response.json()[\"member_price\"]).to.eq(0);\r",
+							"    pm.expect(pm.response.json()[\"teacher\"]).to.eq('teacherName');    \r",
+							"    pm.expect(pm.response.json()[\"datetime\"]).to.eq(\"2022-11-02 11:00am\");\r",
+							"    pm.expect(pm.response.json()[\"capacity\"]).to.eq(100);\r",
+							"    //Check if the self url is correct\r",
+							"    const self_url = pm.environment.get(\"app_url\") + \"/classes/\" + pm.response.json()[\"id\"];\r",
+							"    console.log(self_url)\r",
+							"    console.log(pm.response.json()[\"self\"])\r",
+							"    pm.expect(pm.response.json()[\"self\"]).to.eq(self_url);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"awesome class\",\r\n  \"description\": \"the most awesome class\",\r\n  \"price\": 20,\r\n  \"member_price\": 0,\r\n  \"teacher\": \"teacherName\",\r\n  \"datetime\": \"2022-11-02 11:00am\", \r\n  \"capacity\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/classes",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"classes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"200 status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"content is valid\", function () {\r",
+							"    pm.expect(pm.response.json()[\"OSUID\"]).to.eq(\"lastnameF\");\r",
+							"    pm.expect(pm.response.json()[\"name\"]).to.eq(\"Firstname LastName\");\r",
+							"    pm.expect(pm.response.json()[\"email\"]).to.eq(\"lastnameF@oregonstate.edu\");\r",
+							"    //Check if the self url is correct\r",
+							"    const self_url = pm.environment.get(\"app_url\") + \"/students/\" + pm.response.json()[\"id\"];\r",
+							"    console.log(self_url)\r",
+							"    console.log(pm.response.json()[\"self\"])\r",
+							"    pm.expect(pm.response.json()[\"self\"]).to.eq(self_url);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/students/{{student_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"students",
+						"{{student_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Membership to Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"200 status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"content is valid\", function () {\r",
+							"    pm.expect(pm.response.json()[\"OSUID\"]).to.eq(\"lastnameF\");\r",
+							"    pm.expect(pm.response.json()[\"name\"]).to.eq(\"Firstname LastName\");\r",
+							"    pm.expect(pm.response.json()[\"email\"]).to.eq(\"lastnameF@oregonstate.edu\");\r",
+							"    //Check if the self url is correct\r",
+							"    const self_url = pm.environment.get(\"app_url\") + \"/students/\" + pm.response.json()[\"id\"];\r",
+							"    console.log(self_url)\r",
+							"    console.log(pm.response.json()[\"self\"])\r",
+							"    pm.expect(pm.response.json()[\"self\"]).to.eq(self_url);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"term\": \"Fa2022\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/students/{{student_id}}/membership",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"students",
+						"{{student_id}}",
+						"membership"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Confirm Membership",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"200 status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"content is valid\", function () {\r",
+							"    pm.expect(pm.response.json()[\"OSUID\"]).to.eq(\"lastnameF\");\r",
+							"    pm.expect(pm.response.json()[\"name\"]).to.eq(\"Firstname LastName\");\r",
+							"    pm.expect(pm.response.json()[\"email\"]).to.eq(\"lastnameF@oregonstate.edu\");\r",
+							"    //Check if the self url is correct\r",
+							"    const self_url = pm.environment.get(\"app_url\") + \"/students/\" + pm.response.json()[\"id\"];\r",
+							"    console.log(self_url)\r",
+							"    console.log(pm.response.json()[\"self\"])\r",
+							"    pm.expect(pm.response.json()[\"self\"]).to.eq(self_url);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/students/{{student_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"students",
+						"{{student_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Students",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"200 status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/students",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a Class",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"200 status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"content is valid\", function () {\r",
+							"    pm.expect(pm.response.json()[\"name\"]).to.eq(\"awesome class\");\r",
+							"    pm.expect(pm.response.json()[\"description\"]).to.eq(\"the most awesome class\");\r",
+							"    pm.expect(pm.response.json()[\"price\"]).to.eq(20);\r",
+							"    pm.expect(pm.response.json()[\"member_price\"]).to.eq(0);\r",
+							"    pm.expect(pm.response.json()[\"teacher\"]).to.eq('teacherName');    \r",
+							"    pm.expect(pm.response.json()[\"datetime\"]).to.eq(\"2022-11-02 11:00am\");\r",
+							"    pm.expect(pm.response.json()[\"capacity\"]).to.eq(100);\r",
+							"    //Check if the self url is correct\r",
+							"    const self_url = pm.environment.get(\"app_url\") + \"/classes/\" + pm.response.json()[\"id\"];\r",
+							"    console.log(self_url)\r",
+							"    console.log(pm.response.json()[\"self\"])\r",
+							"    pm.expect(pm.response.json()[\"self\"]).to.eq(self_url);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/classes/{{class_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"classes",
+						"{{class_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Classes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"200 status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/classes",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"classes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a Student to a class",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"204 status code\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/students/{{student_id}}/classes/{{class_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"students",
+						"{{student_id}}",
+						"classes",
+						"{{class_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Students From Class",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"200 status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/classes/{{class_id}}/students",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"classes",
+						"{{class_id}}",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a Student Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"200 status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/students/{{student_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"students",
+						"{{student_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove a Student from a class",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"204 status code\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/students/{{student_id}}/classes/{{class_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"students",
+						"{{student_id}}",
+						"classes",
+						"{{class_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Confrim students are removed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"200 status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/classes/{{class_id}}/students",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"classes",
+						"{{class_id}}",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a Student to a class Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"204 status code\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/students/{{student_id}}/classes/{{class_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"students",
+						"{{student_id}}",
+						"classes",
+						"{{class_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a Student Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"200 status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/students/{{student_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"students",
+						"{{student_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"204 status code\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/students/{{student_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"students",
+						"{{student_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check removed student is gone",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"200 status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/classes/{{class_id}}/students",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"classes",
+						"{{class_id}}",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Class",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"204 status code\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/classes/{{class_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"classes",
+						"{{class_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

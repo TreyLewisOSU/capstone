@@ -1,0 +1,1 @@
+[{"origin": ["*"],"Access-Control-Allow-Origin": ["*"],"responseHeader": ["*"],"method":["GET","POST","PATCH","PUT","DELETE","HEAD"],"maxAgeSeconds": 86400}]
