@@ -6,7 +6,7 @@ function StudentPage() {
     const [students, setStudents] = useState([])
 
     const navigate = useNavigate()
-    const URL = 'https://osu-craft-center-capstone-f22.uw.r.appspot.com/students'
+    const URL = 'https://garzacao-capstone.uc.r.appspot.com/students'
 
     const fetchStudents = async () => {
         // GET request using fetch with async/await

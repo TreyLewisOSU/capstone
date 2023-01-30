@@ -7,8 +7,8 @@ function AddStudentToClass() {
     const [nameClass, setNameClass] = useState([])
 
     // const navigate = useNavigate()
-    const URL = 'https://osu-craft-center-capstone-f22.uw.r.appspot.com/classes'
-    const URL_put = 'https://osu-craft-center-capstone-f22.uw.r.appspot.com/students/'
+    const URL = 'https://garzacao-capstone.uc.r.appspot.com/classes'
+    const URL_put = 'https://garzacao-capstone.uc.r.appspot.com/students'
 
     const fetchClasses = async () => {
         // GET request using fetch with async/await

@@ -6,7 +6,7 @@ function ClassPage() {
     const [classes, setClasses] = useState([])
 
     const navigate = useNavigate()
-    const URL = 'https://osu-craft-center-capstone-f22.uw.r.appspot.com/classes'
+    const URL = 'https://garzacao-capstone.uc.r.appspot.com/classes'
 
     const fetchClasses = async () => {
         // GET request using fetch with async/await

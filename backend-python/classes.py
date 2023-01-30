@@ -4,7 +4,7 @@ from google.cloud import datastore
 import json
 import constants
 
-APP_URL = 'https://osu-craft-center-capstone-f22.uw.r.appspot.com'
+APP_URL = 'https://garzacao-capstone.uc.r.appspot.com'
 
 client = datastore.Client()
 

@@ -6,7 +6,7 @@ function RegisteredStudentsInClass() {
 
     const [students, setStudents] = useState([])
 
-    const URL = 'https://osu-craft-center-capstone-f22.uw.r.appspot.com/'
+    const URL = 'https://garzacao-capstone.uc.r.appspot.com'
 
     const fetchStudents = async () => {
         // GET request using fetch with async/await

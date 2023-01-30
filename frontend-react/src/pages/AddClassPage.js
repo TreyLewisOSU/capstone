@@ -9,7 +9,7 @@ export default class AddClassForm extends Component {
     handleSubmit(event){ 
         event.preventDefault();
         alert("Your class is being added. Please click the classes button to see your new class")
-        fetch('https://osu-craft-center-capstone-f22.uw.r.appspot.com/classes', {
+        fetch('https://garzacao-capstone.uc.r.appspot.com/classes', {
             method: 'post',
             headers: {'Content-Type':'application/json', "Access-Control-Allow-Origin": "*"},
             body: JSON.stringify({

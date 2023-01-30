@@ -9,7 +9,7 @@ export default class AddStudentForm extends Component {
     handleSubmit(event) {
         event.preventDefault()
         alert("Your student has just been added. Please click the students button to see your new student")
-        fetch('https://osu-craft-center-capstone-f22.uw.r.appspot.com/students', {
+        fetch('https://garzacao-capstone.uc.r.appspot.com/students', {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({
