@@ -57,7 +57,8 @@ function ClassPage() {
                         <th>Price</th>
                         <th>Number of Students</th>
                         <th>View Students:</th>
-                        <th>Delete Class?</th>
+                        <th>Edit Class</th>
+                        <th>Delete Class</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,6 +76,9 @@ function ClassPage() {
                                 <button onClick={() => findRegisteredStudents(selected_class.id)}>
                                     View Registered Students
                                 </button>
+                            </td>
+                            <td>
+                                <a href='/classEdit'>Edit Me!</a>
                             </td>
                             <td>
                                 <button onClick={() => deleteClasses(selected_class.id)}>

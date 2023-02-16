@@ -27,6 +27,15 @@ function StudentPage() {
         setStudents(newStudents)
     }
 
+    const editStudents = (student_id) => {
+        fetch((URL + '/' + student_id), {
+            method: "PUT"})
+        const newStudents = students.filter(
+            (student) => student.id !== student_id
+        )
+        setStudents(newStudents)
+    }
+
     const addWinterMembership = (student_id) => {
         fetch((URL + '/' + student_id + '/membership'), {
             method: "PUT",
@@ -64,7 +73,8 @@ function StudentPage() {
                         <th>Classes Taken</th>
                         <th>Add Membership:</th>
                         <th>Add to Class:</th>
-                        <th>Delete Class?</th>
+                        <th>Edit Student</th>
+                        <th>Delete Student</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -85,6 +95,9 @@ function StudentPage() {
                                 <button onClick={() => registerStudentForClass(student.id)}>
                                     Add a Class
                                 </button>
+                            </td>
+                            <td>
+                                <a href="/editStudent">Edit Me!</a>
                             </td>
                             <td>
                                 <button onClick={() => deleteStudents(student.id)}>

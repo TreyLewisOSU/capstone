@@ -7,6 +7,7 @@ function Navigation() {
             <a className="navbar-brand" href="/">Home</a>
             <a className="navbar-brand" href="/classes">Classes</a>
             <a className="navbar-brand" href="/students">Students</a>
+            <a className="navbar-brand" href="/registrationForm">Registration Form</a>
           </div>
         </nav>
     )
